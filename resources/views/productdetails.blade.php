@@ -4,23 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MILLENNIUMWORKS.</title>
-	<!-- CDN Bootstrap -->
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/base.css">
-	<link rel="stylesheet" href="js/navsearch.js">
-	<!-- Font Poppins dari Google Fonts -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-	<!-- Font Manrope dari Google Fonts -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
-	<style>
-		.detail{
-			font-family: 'Poppins';
-			font-weight: 400;
-		}
+    <!-- CDN Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="js/navsearch.js">
+    <!-- Font Poppins dari Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Font Manrope dari Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+    <style>
+        .detail{
+            font-family: 'Poppins';
+            font-weight: 400;
+        }
 
         .container{
             padding-top: 50px;
@@ -30,7 +31,6 @@
             margin-top: 50px;
         }
 
-		
         .product-details {
             margin-left: 20px;
             max-width: 300px;
@@ -48,13 +48,12 @@
             margin-top: 4px;
         }
 
-		.price {
+        .price {
             font-size: 24px;
             color: #000;
             margin: 10px 0;
         }
 
-        
         .color-selection {
             display: flex;
             gap: 10px;
@@ -73,7 +72,6 @@
             border-color: #000;
         }
 
-        
         .size-selection {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -100,7 +98,6 @@
             background-color: #f0f0f0;
         }
 
-        
         .add-to-bag {
             width: 100%;
             padding: 15px;
@@ -113,21 +110,39 @@
             font-size: 16px;
         }
 
-        .favourite {
-            margin-top: 10px;
+        .wishlist-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: white;
+            color: #000;
             text-align: center;
+            border: 2px solid #000;
+            border-radius: 8px;
             cursor: pointer;
-            color: #333;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .wishlist-btn:hover {
+            background-color: #000;
+            color: white;
+        }
+
+        .alert {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 8px;
         }
     </style>
 </head>
 <body>
 
-	@extends('layouts.app')
+    @extends('layouts.app')
 
-	@section('title', 'Homepage')
+    @section('title', 'Homepage')
 
-	@section('content')
+    @section('content')
 
     <div class="container detail">
         <div class="row">
@@ -147,15 +162,32 @@
                             <button type="submit" class="add-to-bag">Add to Cart</button>
                         </form>
 
-                        <div class="favourite">♡ Favourite</div>
+                        <!-- Add to Wishlist -->
+                        <form action="{{ route('wishlist.store', $product->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="wishlist-btn">
+                                <i class="bi bi-heart"></i> Add to Wishlist
+                            </button>
+                        </form>
+
+                        @if(session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
+                        @if(session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-	
     @endsection
-	<script src="js/navsearch.js"></script>
+    <script src="js/navsearch.js"></script>
 </body>
 </html>

@@ -61,16 +61,11 @@ class ProductController extends Controller
             'description' => 'required',
             'price' => 'required|numeric',
             'stock' => 'required|integer',
-            'image' => 'nullable|image',
+            'image' => 'nullable|url',
             'category' => 'required',
         ]);
 
         $data = $request->all();
-
-        // Handle file upload
-        if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('products', 'public');
-        }
 
         $product->update($data);
 

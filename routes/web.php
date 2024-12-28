@@ -8,6 +8,7 @@ use App\Http\Controllers\MessageController;
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\WishlistController;
 
 Route::get('/', function () {
     return view('index');
@@ -90,3 +91,10 @@ Route::middleware('auth')->group(function () {
 Route::get('product/{id}', [ProductController::class, 'show'])->name('product.details');
 //checkout
 Route::middleware('auth')->get('checkout', [CartController::class, 'checkout'])->name('checkout');
+
+//wishlist
+Route::middleware('auth')->group(function () {
+    Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
+    Route::post('/wishlist/{product}', [WishlistController::class, 'store'])->name('wishlist.store');
+    Route::delete('/wishlist/{wishlist}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
+});

@@ -12,7 +12,7 @@
                 <a class="btn btn-outline-secondary me-2" type="button" href="{{ route('account') }}" aria-label="Account">
                     <i class="bi bi-person"></i>
                 </a>
-                <a class="btn btn-outline-danger me-2" type="button" href="{{route('wishlist')}}" aria-label="Wishlist">
+                <a class="btn btn-outline-danger me-2" type="button" href="{{route('wishlist.index')}}" aria-label="Wishlist">
 				  <i class="bi bi-heart"></i>
                 </a>
             @endauth
