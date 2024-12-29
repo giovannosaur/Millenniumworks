@@ -36,9 +36,12 @@
                     <img class="card-img-top" src="{{ $product->image }}" alt="{{ $product->name }}">
                 </a>
                 <div class="card-body">
-                    <h5 class="card-title">{{ $product->name }}</h5>
+                    <a href="{{ url('product/' . $product->id) }}" class="text-decoration-none">
+                        <h5 class="card-title">{{ $product->name }}</h5>
+                    </a>
                     <h5 class="card-title">IDR{{ $product->price }}</h5>
                     <p class="card-text">{{ $product->category }}</p>
+                    <p class="card-text">Stock: {{ $product->stock }}</p>
                 </div>
             </div>
         </div>
