@@ -160,6 +160,26 @@
                         <form action="{{ route('cart.add', $product->id) }}" method="POST">
                             @csrf
                             <button type="submit" class="add-to-bag">Add to Cart</button>
+                        
+
+                            <div class="favourite">♡ Favourite</div>
+                            <div class="stock-status mb-3">
+                                <span class="badge {{ $product->stock > 0 ? 'bg-success' : 'bg-danger' }}">
+                                {{ $stockStatus }}
+                                </span>
+                            </div>
+                            @if($product->stock > 0)
+                                <div class="quantity-selector mb-3">
+                                    <label for="quantity" class="form-label">Quantity:</label>
+                                    <div class="input-group" style="max-width: 200px;">
+                                        <button class="btn btn-outline-secondary" type="button" onclick="decrementQuantity()">-</button>
+                                        <input type="number" class="form-control text-center" id="quantity" name="quantity" 
+                                            value="1" min="1" max="{{ $maxQuantity }}" 
+                                            onchange="validateQuantity(this, {{ $maxQuantity }})">
+                                        <button class="btn btn-outline-secondary" type="button" onclick="incrementQuantity()">+</button>
+                                    </div>
+                                </div>
+                            @endif
                         </form>
 
                         <!-- Add to Wishlist -->
@@ -189,5 +209,29 @@
 
     @endsection
     <script src="js/navsearch.js"></script>
+    <script>
+        function validateQuantity(input) {
+            let max = {{ $maxQuantity }};
+            let value = parseInt(input.value);
+            if (input.value > max) input.value = max;
+            if (input.value < 1) input.value = 1;
+        }
+
+        function incrementQuantity() {
+            let input = document.getElementById('quantity');
+            let currentValue = parseInt(input.value);
+            if (currentValue < {{ $maxQuantity }}) {
+                input.value = currentValue + 1;
+            }
+        }
+
+        function decrementQuantity() {
+            let input = document.getElementById('quantity');
+            let currentValue = parseInt(input.value);
+            if (currentValue > 1) {
+                input.value = currentValue - 1;
+            }
+        }
+    </script>
 </body>
 </html>
