@@ -54,7 +54,7 @@
         </div>
         <div class="col-sm-6 col-md-4 col-lg-3 product-card" data-category="longsleeves">
             <div id="ll" class="card">
-                <a href="">
+                <a href="{{ route('messages.index') }}">
                     <img class="card-img-top" src="https://t4.ftcdn.net/jpg/00/98/26/11/360_F_98261159_Po5JS7ds82XaePJIsG1MiEtHRzOeUPNj.jpg" alt="Product 1">
                 </a>
                 <div class="card-body">
