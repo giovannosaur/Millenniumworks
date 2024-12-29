@@ -83,6 +83,8 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::findOrFail($id); // Fetch the product by ID
+        $stockStatus = $product->stock > 0 ? 'In Stock (' . $product->stock . ' units)' : 'Out of Stock';
+        $maxQuantity = $product->stock;
         return view('productdetails', compact('product'));
     }
 
