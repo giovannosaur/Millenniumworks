@@ -98,3 +98,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/wishlist/{product}', [WishlistController::class, 'store'])->name('wishlist.store');
     Route::delete('/wishlist/{wishlist}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
 });
+
+//cart(tambahan)
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
