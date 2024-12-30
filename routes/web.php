@@ -9,6 +9,7 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\OrderController;
 
 Route::get('/', function () {
     return view('index');
@@ -38,6 +39,7 @@ Route::view('/login', 'login')->name('login');
 Route::view('/signup', 'signup')->name('signup');
 Route::view('/detailproduk', 'detailproduk')->name('detailproduk');
 Route::view('/wishlist', 'wishlist')->name('wishlist');
+Route::view('/orderHistory', 'orderHistory')->name('orderHistory');
 
 
 Route::get('/admin', function () {
@@ -104,3 +106,9 @@ Route::middleware('auth')->group(function () {
 
 //cart(tambahan)
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+
+// Add to web.php
+Route::middleware('auth')->group(function () {
+    Route::post('/checkout/process', [CartController::class, 'processCheckout'])->name('checkout.process');
+    Route::get('/order-history', [OrderController::class, 'index'])->name('orderHistory');
+});

@@ -8,11 +8,20 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     // Public Products Page
-    public function indexPublic()
+    public function indexPublic(Request $request)
     {
-    $products = Product::all();
-    return view('shop', compact('products')); // Updated view file name
+        // Ambil nilai parameter search
+        $searchTerm = $request->input('search');
+    
+        // Jika ada keyword, filter produk, jika tidak ambil semua produk
+        $products = Product::when($searchTerm, function ($query, $searchTerm) {
+            $query->where('name', 'like', '%' . $searchTerm . '%')
+                  ->orWhere('category', 'like', '%' . $searchTerm . '%');
+        })->get();
+    
+        return view('shop', compact('products', 'searchTerm'));
     }
+    
 
 
     // Admin Products Page
@@ -87,5 +96,5 @@ class ProductController extends Controller
         $maxQuantity = $product->stock;
         return view('productdetails', compact('product', 'stockStatus', 'maxQuantity'));
     }
-
+    
 }

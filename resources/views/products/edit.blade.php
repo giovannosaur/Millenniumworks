@@ -65,7 +65,7 @@
         </div>
         <div class="mb-3">
             <label for="image" class="form-label">Product Image Link</label>
-            <input type="url" name="image" id="image" class="form-control">
+            <input type="url" name="image" id="image" class="form-control" value="{{ old('image', $product->image) }}" required>
         </div>
         <button type="submit" class="btn btn-success">Update Product</button>
     </form>

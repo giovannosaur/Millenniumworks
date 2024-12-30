@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Products</title>
+    <style>
+        .barz{
+            margin:10px;
+        }
+    </style>
 </head>
 <body>
 
@@ -14,7 +19,7 @@
     @section('content')
 	
 	<!-- Search bar + Filter -->
-     <div class="row mb-3 card-text">
+     <div class="container-fluid row mb-3 card-text mt-2">
         <div class="col">
             <button id="tombolall" class="btn btn-primary" onclick="filterByCategory('all')">All</button>
             <button id="tombollongsleeves" class="btn btn-secondary" onclick="filterByCategory('Longsleeves')">Longsleeves</button>
@@ -23,7 +28,7 @@
             <button id="tombolaccessories" class="btn btn-secondary" onclick="filterByCategory('Accessories')">Accessories</button>
         </div>
 		<div class="col-md-4">
-            <input type="text" id="searchInput" class="form-control" placeholder="Search for products..." onkeyup="filterProducts()">
+            <input type="text" id="searchInput" class="form-control" placeholder="Search for products..." value="{{ isset($searchTerm) ? $searchTerm : '' }}" onkeyup="filterProducts()">
         </div>
     </div>
 

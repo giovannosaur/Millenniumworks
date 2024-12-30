@@ -23,9 +23,35 @@
     <main class="container-fluid">
         @yield('content')
     </main>
+    
+    <footer class="text-light mt-5 py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <h5 class="mb-3">MILLENNIUMWORKS.</h5>
+                    <p>Your trusted source for premium fashion and lifestyle products.</p>
+                    <p>© 2024 MILLENNIUMWORKS. All rights reserved.</p>
+                </div>
+                
+                <div class="col-md-4 mb-3">
+                    <h5 class="mb-3">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{{ route('about') }}" class="text-light text-decoration-none">About Us</a></li>
+                        <li><a href="{{ route('contact') }}" class="text-light text-decoration-none">Contact</a></li>
+                        <li><a href="{{ route('shop.index') }}" class="text-light text-decoration-none">Shop</a></li>
+                    </ul>
+                </div>
 
-    <footer class="text-center mt-5">
-        <p>© 2024 MILLENNIUMWORKS.</p>
+                <div class="col-md-4">
+                    <h5 class="mb-3">Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li>Email: info@millenniumworks.com</li>
+                        <li>Phone: +62 123 456 789</li>
+                        <li>Address: Jakarta, Indonesia</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </footer>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">

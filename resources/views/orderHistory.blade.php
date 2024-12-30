@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account</title>
+    <title>About Us</title>
 	<!-- CDN Bootstrap -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/base.css">
@@ -21,7 +21,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 	<style>
         body {
-            font-family: "Poppins", sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: white;
@@ -44,33 +44,36 @@
         .navbarakun a.active {
             color: #ff4500;
         }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
         .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .table-header {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            padding: 40px 20px;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #e0e0e0;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 10px 0;
         }
-        .item {
-            width: 45%;
-            margin-bottom: 40px;
+        .table-header div {
+            flex: 1;
+            text-align: center;
+            font-size: 14px;
+            color: #333;
         }
-        .item h2 {
-            font-size: 20px;
-            margin-bottom: 10px;
+        .table-header div:first-child {
+            text-align: left;
         }
-        .item p {
-            font-size: 16px;
-            margin: 5px 0;
-        }
-        .item a {
-            color: blue;
-            text-decoration: none;
-            font-size: 16px;
-        }
-        @media (max-width: 768px) {
-            .item {
-                width: 100%;
-            }
+        .table-header div:last-child {
+            text-align: right;
         }
     </style>
 </head>
@@ -80,41 +83,41 @@
 
 	@section('title', 'Homepage')
 
-	@section('content')
 	
-    <!-- <div class="container-fluid">
-	    <h1>Welcome,</h1>
-		<div class="namauser">
-			<h1>namauser</h1>
-		</div>
+    @section('content')
+    <div class="navbarakun">
+        <div class="first">
+            <a href="{{route('account')}}">Personal details</a>
+        </div>
+        <div class="second">
+            <a href="#" class="active">Order history</a>
+        </div>
     </div>
-    <div class="container-fluid">
-        <h>Congrats, you are logged in</h2>
-    </div> -->
 
-	
-	<div class="navbarakun">
-		<div class="first">
-			<a href="#" class="active">Personal details</a>
-		</div>
-		<div class="second">
-			<a href="{{route('orderHistory')}}">Order history</a>
-		</div>
+    <div class="container">
+    <div class="table-header">
+        <div>Date</div>
+        <div>ID</div>
+        <div>Products</div>
+        <div>Total/Invoice</div>
     </div>
-	<center>
-    <div class="container row">
-        <img src="https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small_2x/default-avatar-profile-icon-of-social-media-user-vector.jpg" style="width: 240px; height: 200px;">
-        <div class="item">
-            <h2>Email Address</h2>
-            <p>{{ Auth::user()->email }}</p>
+    
+    @foreach($orders as $order)
+    <div class="order-row" style="display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #e0e0e0;">
+        <div>{{ $order->created_at->format('d/m/Y') }}</div>
+        <div>#{{ $order->id }}</div>
+        <div>
+            @foreach($order->items as $item)
+                <a href="{{ route('product.details', $item->product->id) }}" 
+                   style="text-decoration: none; color: #0066cc; display: block; margin-bottom: 5px;">
+                    {{ $item->product->name }} (x{{ $item->quantity }})
+                </a>
+            @endforeach
         </div>
-        <div class="item">
-            <h2>Username</h2> 
-            <p>{{ Auth::user()->name }}</p>
-        </div>
+        <div>IDR {{ number_format($order->total_amount, 0, ',', '.') }}</div>
     </div>
-	</center>
-	
+    @endforeach
+    </div>
     @endsection
 	
 </body>

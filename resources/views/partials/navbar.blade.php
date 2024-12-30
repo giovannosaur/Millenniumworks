@@ -24,7 +24,7 @@
                 </a>
             @endguest
 
-            <a class="btn btn-outline-success" type="button" aria-label="View Cart">
+            <a class="btn btn-outline-success" type="button" href="{{route('cart.index')}}" aria-label="View Cart">
                 <i class="bi bi-cart"></i>
             </a>
         </div>

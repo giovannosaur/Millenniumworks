@@ -12,7 +12,7 @@ function handleSearchKeyPress(event) {
   if (event.key === "Enter") {
     const searchTerm = document.getElementById("searchBar").value;
     if (searchTerm) {
-      window.location.href = `products?search=${encodeURIComponent(searchTerm)}`;
+      window.location.href = `/shop?search=${encodeURIComponent(searchTerm)}`;
     }
   }
 }
@@ -20,9 +20,11 @@ function handleSearchKeyPress(event) {
 document.addEventListener("DOMContentLoaded", function() {
   const urlParams = new URLSearchParams(window.location.search);
   const searchTerm = urlParams.get("search");
-  
+
   if (searchTerm) {
     const searchInput = document.getElementById("searchInput");
-    searchInput.value = searchTerm;
+    if (searchInput) {
+      searchInput.value = searchTerm; // Mengisi search bar pada shop
+    }
   }
 });
