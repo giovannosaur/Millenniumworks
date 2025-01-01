@@ -13,7 +13,7 @@ class ProductController extends Controller
         // Ambil nilai parameter search
         $searchTerm = $request->input('search');
     
-        // Jika ada keyword, filter produk, jika tidak ambil semua produk
+        // Jika ada keyword, filter produk, klo nggak tampilin semua produk
         $products = Product::when($searchTerm, function ($query, $searchTerm) {
             $query->where('name', 'like', '%' . $searchTerm . '%')
                   ->orWhere('category', 'like', '%' . $searchTerm . '%');
@@ -31,13 +31,11 @@ class ProductController extends Controller
         return view('products.index', compact('products'));
     }
 
-    // Show form to create a new product
     public function create()
     {
         return view('products.create');
     }
 
-    // Store new product
     public function store(Request $request)
     {
         $request->validate([
@@ -56,13 +54,10 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Product created successfully.');
     }
 
-    // Show product edit form
     public function edit(Product $product)
     {
         return view('products.edit', compact('product'));
     }
-
-    // Update existing product
     public function update(Request $request, Product $product)
     {
         $request->validate([
@@ -81,7 +76,6 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Product updated successfully.');
     }
 
-    // Delete a product
     public function destroy(Product $product)
     {
         $product->delete();

@@ -14,13 +14,13 @@ class CartController extends Controller
 {
     $product = Product::findOrFail($id);
 
-    // Check if the product is already in the cart
+    // Check produk ada di cart apa engga
     $cartItem = Cart::where('user_id', auth()->id())
                     ->where('product_id', $id)
                     ->first();
 
     if ($cartItem) {
-        // Increment the quantity if already in the cart
+        // tambah kuantitas klo udh ada
         $cartItem->increment('quantity');
     } else {
         // Add new cart item

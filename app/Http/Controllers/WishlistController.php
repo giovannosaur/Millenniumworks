@@ -19,7 +19,7 @@ class WishlistController extends Controller
     {
         $userId = Auth::id();
         
-        // Check if product already in wishlist
+        // Check klo product udh ada
         $exists = Wishlist::where('user_id', $userId)
             ->where('product_id', $productId)
             ->exists();
