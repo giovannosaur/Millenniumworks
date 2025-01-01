@@ -107,7 +107,7 @@ Route::middleware('auth')->group(function () {
 //cart(tambahan)
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 
-// Add to web.php
+//order history
 Route::middleware('auth')->group(function () {
     Route::post('/checkout/process', [CartController::class, 'processCheckout'])->name('checkout.process');
     Route::get('/order-history', [OrderController::class, 'index'])->name('orderHistory');
